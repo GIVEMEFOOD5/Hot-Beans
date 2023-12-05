@@ -25,6 +25,49 @@
 	cursor: none;
 	}
   </style>
+<!-- this is to makem tabel flexable -->
+ <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(all) {
+      background-color: #333;
+    }
+
+    tr {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    td {
+      flex: 1; /* Distribute equal width among flex items */
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #000;
+      border-radius: 5px;
+    }
+  </style>
 
 </head>
 <body onload="updateClock(); setInterval('updateClock()', 1000 )">
@@ -70,6 +113,7 @@ setInterval(updateTime, 1000);
 	box-sizing: border-box;
 	font-family:arial;
 	color: black
+	text-align: center;
 }
 
 /* Style the top navigation bar */
@@ -139,17 +183,18 @@ table, th, td {
   border: 2px solid black;
   border-radius: 10px;
   border-spacing: 20px;
-  background-color: #333
+  background-color: #333;
+  flex: 1;
 }
 th, td, tr {
 	background-color: #ff924a;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
-tr:hover {
+td:hover {
 	background-color: orange;
 }
 
@@ -165,7 +210,8 @@ tr:hover {
 <table>
   <tr>
     <th>picture</th>
-	<th colspan="2"><sub>First </sub> Name <sub> Last</sub></th>
+	<th colspan="2">Forename</th>
+	<th colspan="2">Surname</th>
     <th>Age</th>
 	<th>Job</th>
   </tr>

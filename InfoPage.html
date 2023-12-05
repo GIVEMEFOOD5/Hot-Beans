@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-UK">
+<head updateClock()>
+<title>Hot Beans</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Cursor Example</title>
+  <style>
+    body {
+      cursor: none; /* Hide the default cursor */
+    }
+
+    #custom-cursor {
+      position: absolute;
+      width: 30px; /* Set the width of your custom cursor */
+      height: 30px; /* Set the height of your custom cursor */
+      background-image: url('bean.png'); /* Path to your custom cursor image */
+      background-size: cover;
+      pointer-events: none; /* Make the cursor not interfere with mouse events */
+      z-index: 9999; /* Ensure the cursor is on top of other elements */
+    }
+	
+			.topnav a {
+	cursor: none
+	}
+  </style>
+
+</head>
+<body  onload="updateClock(); setInterval('updateClock()', 1000 )">
+
+<div class="header">
+	<h1 style="font-size:120px;"style="font-family:Agbalumo-Regular">Hot Beans<img src="baked beans.png" alt="beans" width="100" height="100"></h1>
+	<p></p>
+</div>
+
+<p id="time_span">Loading...</p>
+<script>
+function updateTime(){
+    var currentTime = new Date()
+    var hours = currentTime.getHours()
+    var minutes = currentTime.getMinutes()
+    if (minutes < 10){
+        minutes = "0" + minutes
+    }
+    var t_str = hours + ":" + minutes + " ";
+    if(hours > 11){
+        t_str += "PM";
+    } else {
+        t_str += "AM";
+    }
+    document.getElementById('time_span').innerHTML = t_str;
+}
+setInterval(updateTime, 1000);
+</script>
+
+<div class="topnav">
+	<a href="HotbeansHome.html">Home</a>
+	<a href="InfoPage.html">Information</a>
+	<a href="apply.html">Apply Here</a>
+</div>
+
+<style>
+body {background-color:  #ff924a;}
+
+* { 
+cursor: none;
+	box-sizing: border-box;
+	font-family:arial;
+	color: black
+}
+
+img {border-radius: 100px;}
+
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: orange;
+  color: black;
+}
+
+
+</style>
+
+<style>
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 15px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width:600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+
+  <!-- Custom cursor element -->
+  <div id="custom-cursor"></div>
+
+  <script>
+    document.addEventListener('mousemove', (event) => {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.left = `${event.pageX - customCursor.clientWidth / 2}px`;
+      customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
+    });
+	
+	    function showCursor() {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.display = 'block';
+    }
+
+    function hideCursor() {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.display = 'none';
+    }
+  </script>
+
+<!-- Cursor trail images will be dynamically added here -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var trailImages = [];
+    var trailSize = 10; // Number of trail images
+
+    // Create trail images and append them to the body
+    for (var i = 0; i < trailSize; i++) {
+      var trailImage = document.createElement('img');
+      trailImage.src = 'path/to/cursor-image.png'; // Replace with the path to your cursor image
+      trailImage.className = 'cursor-trail';
+      document.body.appendChild(trailImage);
+      trailImages.push(trailImage);
+    }
+
+    // Update the position of trail images on mousemove
+    document.addEventListener('mousemove', function (event) {
+      var mouseX = event.clientX;
+      var mouseY = event.clientY;
+
+      // Update the position of each trail image
+      for (var i = 0; i < trailSize; i++) {
+        var trailImage = trailImages[i];
+        var offset = i * 5; // Adjust the spacing between trail images
+
+        // Calculate the position based on the offset
+        var positionX = mouseX - offset;
+        var positionY = mouseY - offset;
+
+        // Set the position of the trail image
+        trailImage.style.left = positionX + 'px';
+        trailImage.style.top = positionY + 'px';
+		}
+	});
+});
+</script>
+
+<div class="row">
+  <div class="column">
+    <u><h2>Qualifications</h2></u>
+    <p>To apply for this you must have a merit level qualification it somthing related to website desgin. If you do not have this we can provide course links for you to get the training required.</p>
+  </div>
+  
+  <div class="column">
+    <h2>Column</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+  </div>
+  
+  <div class="column">
+    <h2>Column</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+  </div>
+</div>
+
+</body>

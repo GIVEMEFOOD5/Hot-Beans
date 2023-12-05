@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-UK">
+<head updateClock()>
+<title>Hot Beans</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Cursor Example</title>
+  <style>
+    body {
+      cursor: none; /* Hide the default cursor */
+    }
+
+    #custom-cursor {
+      position: absolute;
+      width: 30px; /* Set the width of your custom cursor */
+      height: 30px; /* Set the height of your custom cursor */
+      background-image: url('bean.png'); /* Path to your custom cursor image */
+      background-size: cover;
+      pointer-events: none; /* Make the cursor not interfere with mouse events */
+      z-index: 9999; /* Ensure the cursor is on top of other elements */
+    }
+	
+	.topnav a {
+	cursor: none
+	}
+	
+	.no-cursor {
+		cursor: none;
+	}
+  </style>
+
+  <style>
+    /* Style for the overlay background */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    /* Style for the mini window */
+    .mini-window {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+
+</head>
+<body  onload="updateClock(); setInterval('updateClock()', 1000 )">
+
+<div class="header">
+	<h1 style="font-size:120px;"style="font-family:Agbalumo-Regular">Hot Beans<img src="baked beans.png" alt="beans" width="100" height="100"></h1>
+	<p></p>
+</div>
+
+<p id="time_span">Loading...</p>
+<script>
+function updateTime(){
+    var currentTime = new Date()
+    var hours = currentTime.getHours()
+    var minutes = currentTime.getMinutes()
+    if (minutes < 10){
+        minutes = "0" + minutes
+    }
+    var t_str = hours + ":" + minutes + " ";
+    if(hours > 11){
+        t_str += "PM";
+    } else {
+        t_str += "AM";
+    }
+    document.getElementById('time_span').innerHTML = t_str;
+}
+setInterval(updateTime, 1000);
+</script>
+
+<div class="topnav">
+	<a href="HotbeansHome.html">Home</a>
+	<a href="InfoPage.html">Information</a>
+	<a href="apply.html">Apply Here</a>
+</div>
+
+<style>
+body {background-color:  #ff924a;}
+
+* { 
+	cursor: none;
+	box-sizing: border-box;
+	font-family:arial;
+	color: black
+}
+
+/* start of form */
+ 
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+ 
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ff924a;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+ 
+input[type=submit] {
+  background-color: #ff924a;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+ 
+input[type=submit]:hover {
+  background-color: #ff924a;
+}
+ 
+.container {
+  border-radius: 5px;
+  background-color: #ff924a;
+  padding: 20px;
+  color: black;
+}
+ 
+ 
+/* end of form */
+
+img {border-radius: 100px;}
+
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: orange;
+  color: black;
+}
+</style>
+
+  <!-- Custom cursor element -->
+  <div id="custom-cursor"></div>
+
+  <script>
+    document.addEventListener('mousemove', (event) => {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.left = `${event.pageX - customCursor.clientWidth / 2}px`;
+      customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
+    });
+	
+	    function showCursor() {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.display = 'block';
+    }
+
+    function hideCursor() {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.display = 'none';
+    }
+</script>
+
+
+<br>
+
+<script>
+function validateForm() {
+  var x = document.forms["myForm"]["fname"].value;
+  if (x == "" || x == null) {
+    alert("All areas must be filled out");
+    return false;
+  }
+}
+</script>
+</head>
+<body>
+
+
+<form action="mailto:da358188@callywith.ac.uk" method="post">
+  <div class="container">
+    <h1>Apply Here</h1>
+    <p>Please fill in this form to apply for a job.</p>
+    
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+    <label>
+      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+	</label>
+	<br>
+	<br>
+	<b>Please enter the job title you would like</b>
+	<select class="no-cursor" name="jobTitle" required>
+	<option value="front">Front-end developer</option>
+	<option value="back">Back-end developer</option>
+	<option value="full">Full-stack developer</option>
+	</select>
+
+	  Prefered Gender:
+  <input value="Female" type="radio" name="Gender">
+  Female
+  <input value="Male" type="radio" name="Gender">
+  Male
+   <input value="Other" type="radio" name="Gender" required>
+  Other
+    <p>By creating an account you agree to our <a href="#" onclick="openMiniWindow()" style="color:dodgerblue">Terms & Conditions</a>.</p> <!-- this opens a mini window -->
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="applybtn">Apply</button>
+    </div>
+  </div>
+</form>
+
+
+<!-- Overlay and mini window -->
+<div class="overlay" id="overlay">
+  <div class="mini-window">
+    <h2>Terms and Conditions</h2>
+    <p>By accepting and applying you give me full permission to use your email and password for whatever i feel like.</p>
+    <button onclick="closeMiniWindow()">Accept</button>
+  </div>
+</div>
+
+<script>
+  function openMiniWindow() {
+    document.getElementById('overlay').style.display = 'flex';
+  }
+
+  function closeMiniWindow() {
+    document.getElementById('overlay').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

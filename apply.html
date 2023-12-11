@@ -134,6 +134,16 @@ input[type=submit]:hover {
   color: black;
 }
  
+	label {
+	display: block;
+	margin-bottom: 8px;
+	}
+	
+	.error-message {
+	color: #ff0000;
+	margin-top: -10px;
+	margin-bottom: 10px;
+	}
  
 /* end of form */
 
@@ -187,39 +197,126 @@ img {border-radius: 100px;}
 
 <br>
 
-<script>
-function validateForm() {
-  var x = document.forms["myForm"]["fname"].value;
-  if (x == "" || x == null) {
-    alert("All areas must be filled out");
-    return false;
-  }
-}
-</script>
+    <script>
+	
+	var termsAccepted = false;
+	
+        function validateForm() {
+		
+			            // Only submit the form if terms are accepted
+            if (!termsAccepted) {
+                alert("Please accept the terms and conditions before submitting the application.");
+                return false;
+            }
+
+            return true;
+        }
+		
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var resume = document.getElementById('resume').value;
+            var experience = document.getElementById('experience').value;
+            var skills = document.getElementById('skills').value;
+
+            var errorMessages = [];
+
+            if (!name.trim()) {
+                errorMessages.push("Please enter your full name.");
+            }
+
+            if (!email.trim() || !isValidEmail(email)) {
+                errorMessages.push("Please enter a valid email address.");
+            }
+
+            if (!phone.trim()) {
+                errorMessages.push("Please enter your phone number.");
+            }
+
+            if (!resume.trim()) {
+                errorMessages.push("Please upload your resume.");
+            }
+
+            if (!experience.trim() || isNaN(experience) || experience < 0) {
+                errorMessages.push("Please enter a valid number for years of experience.");
+            }
+
+            if (!skills.trim()) {
+                errorMessages.push("Please enter your skills.");
+            }
+
+            var errorMessageContainer = document.getElementById('error-messages');
+            errorMessageContainer.innerHTML = "";
+
+            if (errorMessages.length > 0) {
+                for (var i = 0; i < errorMessages.length; i++) {
+                    errorMessageContainer.innerHTML += "<p class='error-message'>" + errorMessages[i] + "</p>";
+                }
+                return false;
+            }
+
+            return true;
+        }
+
+        function isValidEmail(email) {
+            // Basic email validation
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+		
+        function isValidPhoneNumber(phone) {
+            // Basic phone number validation (10 digits with space after the first 5 digits)
+            var phoneRegex = /^\d{5}(\s?)\d{6}$/;
+            return phoneRegex.test(phone);
+        }
+		
+		        function openoverlay() {
+            var overlay = document.getElementById('overlay');
+            overlay.style.display = 'block';
+        }
+
+        function closeoverlay() {
+            var overlay = document.getElementById('overlay');
+            overlay.style.display = 'none';
+        }
+
+        function acceptTerms() {
+            // Perform actions when terms are accepted
+            closeoverlay();
+        }
+
+        function declineTerms() {
+            // Perform actions when terms are declined
+			closeoverlay();
+        }
+    </script>
 </head>
 <body>
 
 
-<form action="mailto:da358188@callywith.ac.uk" method="post">
+<form action="\submit-application" method="post" onsubmit="return validateForm()">
   <div class="container">
     <h1>Apply Here</h1>
     <p>Please fill in this form to apply for a job.</p>
-    
+	
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" placeholder="First Last" required>
+	
+	<label for="phone"><b>Phone Number:</b></label>
+	<input type="text" id="phone" name="phone" placeholder="12345 123456" required>
 
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
     <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
 
     <label>
       <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
 	</label>
-	<br>
-	<br>
 	<b>Please enter the job title you would like</b>
 	<select class="no-cursor" name="jobTitle" required>
 	<option value="front">Front-end developer</option>
@@ -227,14 +324,30 @@ function validateForm() {
 	<option value="full">Full-stack developer</option>
 	</select>
 
-	  Prefered Gender:
+	  <b>Prefered Gender:</b>
   <input value="Female" type="radio" name="Gender">
   Female
   <input value="Male" type="radio" name="Gender">
   Male
    <input value="Other" type="radio" name="Gender" required>
   Other
-    <p>By creating an account you agree to our <a href="#" onclick="openMiniWindow()" style="color:dodgerblue">Terms & Conditions</a>.</p> <!-- this opens a mini window -->
+  <br><br>
+    <b><label for="resume">Resume (PDF or Word):</label></b>
+    <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required>
+<br><br>
+    <b><label for="portfolio">Portfolio URL:</label></b>
+    <input type="url" id="portfolio" name="portfolio" placeholder="https://portfolio.example.com">
+<br><br>
+    <b><label for="experience">Years of Experience:</label></b>
+    <input type="number" id="experience" name="experience" min="0" placeholder="Years of your experience:" required>
+<br><br>
+    <b><label for="skills">Skills (comma-separated):</label></b>
+    <input type="text" id="skills" name="skills" placeholder="HTML, CSS, JavaScript" required>
+
+    <b><label for="comments">Additional Comments:</label></b>
+    <textarea id="comments" name="comments" rows="4" placeholder="Write any additional comments here..."></textarea>
+  
+    <p>By pressing apply you agree to our <a href="#" onclick="openMiniWindow()" style="color:dodgerblue">Terms & Conditions</a>.</p> <!-- this opens a mini window -->
 
     <div class="clearfix">
       <button type="button" class="cancelbtn">Cancel</button>
@@ -248,8 +361,21 @@ function validateForm() {
 <div class="overlay" id="overlay">
   <div class="mini-window">
     <h2>Terms and Conditions</h2>
-    <p>By accepting and applying you give me full permission to use your email and password for whatever i feel like.</p>
-    <button onclick="closeMiniWindow()">Accept</button>
+    <p><strong>1. Introduction</strong></p>
+            <p>Welcome to our web development job application form. Before submitting your application, please read and agree to the following terms and conditions:</p>
+            
+            <p><strong>2. Application Submission</strong></p>
+            <p>By submitting your application, you acknowledge that the information provided is accurate and complete to the best of your knowledge.</p>
+            
+            <p><strong>3. Privacy Policy</strong></p>
+            <p>Your personal information will be handled in accordance with our privacy policy. Please review our privacy policy for more details.</p>
+
+            <p><strong>4. Agreement</strong></p>
+            <p>By checking the box and submitting your application, you agree to be bound by these terms and conditions.</p>
+            
+			<div class="modal-buttons">
+				<button onclick="acceptTerms(); closeoverlay();">Accept</button>
+				<button onclick="declineTerms(); closeoverlay();">Decline</button>
   </div>
 </div>
 
@@ -261,6 +387,13 @@ function validateForm() {
   function closeMiniWindow() {
     document.getElementById('overlay').style.display = 'none';
   }
+  
+          // Enable or disable the submit button based on the termsAccepted status
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            if (!termsAccepted) {
+                alert("Please accept the terms and conditions before submitting the application.");
+            }
+        });
 </script>
 
 </body>

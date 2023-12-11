@@ -142,58 +142,20 @@ img {border-radius: 100px;}
     }
   </script>
 
-<!-- Cursor trail images will be dynamically added here -->
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var trailImages = [];
-    var trailSize = 10; // Number of trail images
-
-    // Create trail images and append them to the body
-    for (var i = 0; i < trailSize; i++) {
-      var trailImage = document.createElement('img');
-      trailImage.src = 'path/to/cursor-image.png'; // Replace with the path to your cursor image
-      trailImage.className = 'cursor-trail';
-      document.body.appendChild(trailImage);
-      trailImages.push(trailImage);
-    }
-
-    // Update the position of trail images on mousemove
-    document.addEventListener('mousemove', function (event) {
-      var mouseX = event.clientX;
-      var mouseY = event.clientY;
-
-      // Update the position of each trail image
-      for (var i = 0; i < trailSize; i++) {
-        var trailImage = trailImages[i];
-        var offset = i * 5; // Adjust the spacing between trail images
-
-        // Calculate the position based on the offset
-        var positionX = mouseX - offset;
-        var positionY = mouseY - offset;
-
-        // Set the position of the trail image
-        trailImage.style.left = positionX + 'px';
-        trailImage.style.top = positionY + 'px';
-		}
-	});
-});
-</script>
-
 <div class="row">
   <div class="column">
     <u><h2>Qualifications</h2></u>
-    <p>To apply for this you must have a merit level qualification it somthing related to website desgin. If you do not have this we can provide course links for you to get the training required.</p>
+    <p>At Hot Beans Web, we are on the lookout for skilled web developers who bring a blend of education, technical prowess, and creative problem-solving to our dynamic team. Successful candidates should possess a bachelor's degree in computer science or a related field, demonstrating proficiency in HTML, CSS, and JavaScript. Full-stack developers should showcase additional expertise in server-side languages like PHP, Python, Ruby, or Node.js, while front-end developers are expected to be adept in frameworks like React, Angular, or Vue.js. An understanding of database management, responsive design principles, and version control systems such as Git is crucial. We value continuous learning, effective communication, and collaboration, and candidates are encouraged to present a compelling portfolio that reflects their skills and experience. If you're passionate about web development and eager to contribute to innovative projects, we invite you to join the Hot Beans Web team and be part of our creative and dynamic work environment.</p>
   </div>
   
   <div class="column">
-    <h2>Column</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+    <u><h2>What We Do</h2></u>
+    <p>Hot Beans Web specializes in offering dynamic and focused web development courses with a core focus on HTML, CSS, and JavaScript—the foundational trio of web development. Our courses guide participants through the intricacies of creating visually stunning and responsive websites. Starting with HTML for structuring content, CSS for styling, and JavaScript for adding interactivity, our curriculum ensures a solid understanding of front-end development essentials. Students will dive deep into crafting user-friendly interfaces, mastering the art of layout and design, and harnessing the power of JavaScript for dynamic and engaging web experiences. With a hands-on approach and real-world projects, Hot Beans Web ensures that learners not only grasp the fundamentals but also gain practical skills to confidently build their own web projects. Join us at Hot Beans Web to embark on a learning journey that hones your HTML, CSS, and JavaScript skills, empowering you to create impactful and cutting-edge web applications.</p>
   </div>
   
   <div class="column">
-    <h2>Column</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+    <h2>Courses</h2>
+	<p>If you do not have any of these qualifications then please use these websites: For a JavaScript course then use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide" target="_blank">JavaScript Guide on MDN</a>. For a HTML course then use <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN HTML Guide</a>. For a JavaScript course then use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN CSS Guide</a>.</p>
   </div>
 </div>
 

@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en-UK">
-<head updateClock()>
-<title>Hot Beans</title>
 
-
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hot Beans</title>
+
   <style>
     body {
-      cursor: none; /* Hide the default cursor */
+      cursor: none;
     }
 
     #custom-cursor {
       position: absolute;
-      width: 30px; /* Set the width of your custom cursor */
-      height: 30px; /* Set the height of your custom cursor */
-      background-image: url('bean.png'); /* Path to your custom cursor image */
+      width: 30px;
+      height: 30px;
+      background-image: url('bean.png');
       background-size: cover;
-      pointer-events: none; /* Make the cursor not interfere with mouse events */
-      z-index: 9999; /* Ensure the cursor is on top of other elements */
+      pointer-events: none;
+      z-index: 9999;
     }
-	
-		.topnav a {
-	cursor: none;
-	}
+
+    .topnav a {
+      cursor: none;
+    }
   </style>
-<!-- this is to makem tabel flexable -->
- <style>
- 
-	*{
-	text-align: center;
-	}
+
+  <!-- Additional styles for the table -->
+  <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #ff924a;
     }
 
     table {
@@ -42,68 +40,67 @@
     }
 
     th, td {
-      border: 1px solid #333;
-      padding: 12px;
-      text-align: left;
+      border: 2px solid black;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
     }
 
     th {
-      background-color: #f2f2f2;
-    }
-
-    tr:nth-child(all) {
-      background-color: #333;
-    }
-
-    tr {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 8px;
-    }
-
-    td {
-      flex: 1; /* Distribute equal width among flex items */
+      background-color: #ff924a;
     }
 
     img {
       max-width: 100%;
       height: auto;
       border: 1px solid #000;
-      border-radius: 5px;
+      border-radius: 100px;
+    }
+
+    td:hover {
+      background-color: orange;
+    }
+
+    @media screen and (max-width: 600px) {
+      table {
+        width: 100%;
+      }
     }
   </style>
-
 </head>
+
 <body onload="updateClock(); setInterval('updateClock()', 1000 )">
 
-<div class="header">
-	<h1 style="font-size:120px;"style="font-family:Agbalumo-Regular">Hot Beans<img src="baked beans.png" alt="beans" width="100" height="100"></h1>
-	<p></p>
-</div>
-<p id="time_span">Loading...</p>
-<script>
-function updateTime(){
-    var currentTime = new Date()
-    var hours = currentTime.getHours()
-    var minutes = currentTime.getMinutes()
-    if (minutes < 10){
-        minutes = "0" + minutes
-    }
-    var t_str = hours + ":" + minutes + " ";
-    if(hours > 11){
+  <div class="header">
+    <h1 style="font-size:120px; font-family: Arial;">Hot Beans<img src="baked beans.png" alt="beans" width="100" height="100"></h1>
+    <p id="time_span">Loading...</p>
+  </div>
+
+  <script>
+    // JavaScript for updating time
+    function updateTime() {
+      var currentTime = new Date();
+      var hours = currentTime.getHours();
+      var minutes = currentTime.getMinutes();
+
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+
+      var t_str = hours + ":" + minutes + " ";
+
+      if (hours > 11) {
         t_str += "PM";
-    } else {
+      } else {
         t_str += "AM";
+      }
+
+      document.getElementById('time_span').innerHTML = t_str;
     }
-    document.getElementById('time_span').innerHTML = t_str;
-}
-setInterval(updateTime, 1000);
-</script>
 
-<!-- bean -->
+    setInterval(updateTime, 1000);
+  </script>
 
-
-<!-- this makes buttons at the top to switch through pages -->
 <div class="topnav">
 	<a href="HotbeansHome.html">Home</a>
 	<a href="InfoPage.html">Information</a>
@@ -111,14 +108,17 @@ setInterval(updateTime, 1000);
 </div>
 
 <style>
-/* this makes all fonts arial*/
+body {background-color:  #ff924a;}
+
 * { 
-	cursor: none;
+cursor: none;
 	box-sizing: border-box;
 	font-family:arial;
 	color: black
-	text-align: center;
 }
+
+img {border-radius: 100px;}
+
 
 /* Style the top navigation bar */
 .topnav {
@@ -142,8 +142,8 @@ setInterval(updateTime, 1000);
   color: black;
 }
 
-</style>
 
+</style>
 
   <!-- Custom cursor element -->
   <div id="custom-cursor"></div>
@@ -154,8 +154,8 @@ setInterval(updateTime, 1000);
       customCursor.style.left = `${event.pageX - customCursor.clientWidth / 2}px`;
       customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
     });
-	
-	    function showCursor() {
+
+    function showCursor() {
       const customCursor = document.getElementById('custom-cursor');
       customCursor.style.display = 'block';
     }
@@ -164,100 +164,63 @@ setInterval(updateTime, 1000);
       const customCursor = document.getElementById('custom-cursor');
       customCursor.style.display = 'none';
     }
-</script>
+  </script>
 
-<body>
+  <div class="header">
+    <h1>Home Page</h1>
+  </div>
 
-<div class="header">
-  <h1>Home Page</h1>
-</div>
+  <p title="the hot beans web details">Here at Hot Beans, we are proud that you have chosen to visit our website. Welcome!</p>
+  <p style="color: black;">Welcome to Hot Beans! We are extremely happy you are using our website. Here are our newest junior members of staff:</p>
 
-
-<p title="the hot beans web details">Here at hot beans we are full of pride that you have chosen to look at our website and maybe even considering applying to our company.</p>
-<p style="color:black">Welcome to Hot Beans <br> we are extremly happy you are using our website. <br> <br> Here are our newest junior members of staff:</p>
-
-<!-- this styles the table -->
-<style>
-body {background-color:  #ff924a;}
-h1   {color: black;}
-p    {color: black;}
-img {border-radius: 100px;}
-
-table, th, td {
-  border: 2px solid black;
-  border-radius: 10px;
-  border-spacing: 20px;
-  background-color: #333;
-  flex: 1;
-}
-th, td, tr {
-	background-color: #ff924a;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-}
-
-td:hover {
-	background-color: orange;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width:600px) {
-  table {
-    width: 100%;
-  }
-}
-</style>
-
-<!-- this creates the table adn all its content inside -->
-<table>
-  <tr>
-    <th>picture</th>
-	<th colspan="2">Forename</th>
-	<th colspan="2">Surname</th>
-    <th>Age</th>
-	<th>Job</th>
-  </tr>
-	<td><img src="AI Image of girl working on computer.jfif" alt="a woman smiling to the camera"style="border:1px solid #000000" width="100" height="100"></td>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>36</td>
-	<td>Front-end Developer</td>
-  </tr>
-  <tr>
-	<td><img src="AI generated man infront of laptop.jfif" alt="a man smiling to the camera" style="border:1px solid #000000" width="100" height="100"></td>
-    <td>Mike</td>
-    <td>Jackson</td>
-    <td>28</td>
-	<td>Back-end Developer</td>
-  </tr>
+  <!-- Table for displaying staff information -->
+  <table>
     <tr>
-	<td><img src="man stood smiling at camera.jpg" alt="a man smiling to the camera" style="border:1px solid #000000" width="100" height="100"></td>
-    <td>Tim</td>
-    <td>Yang</td>
-    <td>31</td>
-	<td>Full-stack Developer</td>
-  </tr>
-</table>
+      <th>Picture</th>
+      <th>Forename</th>
+      <th>Surname</th>
+      <th>Age</th>
+      <th>Job</th>
+    </tr>
+    <tr>
+      <td><img src="AI Image of girl working on computer.jfif" alt="a woman smiling to the camera" style="border:1px solid #000000" width="100" height="100"></td>
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>36</td>
+      <td>Front-end Developer</td>
+    </tr>
+    <tr>
+      <td><img src="AI generated man infront of laptop.jfif" alt="a man smiling to the camera" style="border:1px solid #000000" width="100" height="100"></td>
+      <td>Mike</td>
+      <td>Jackson</td>
+      <td>28</td>
+      <td>Back-end Developer</td>
+    </tr>
+    <tr>
+      <td><img src="man stood smiling at camera.jpg" alt="a man smiling to the camera" style="border:1px solid #000000" width="100" height="100"></td>
+      <td>Tim</td>
+      <td>Yang</td>
+      <td>31</td>
+      <td>Full-stack Developer</td>
+    </tr>
+  </table>
 
-<!-- this makes a button that removes text until the page is refreshed -->
-<p id="demo">Hello veiwer this will be full of information ready for you to push button then</p>
+  <!-- Button to toggle information visibility -->
+  <p id="demo">Here we are all about fun ideas such as this button below.</p>
+  <button id="myButton" type="button" class="Button" onclick="removeInfo()">Yep, press me to see what happens.</button>
 
-<button id="myButton" type="button" class="Button" onclick="removeInfo()">please push me if information hurt brain</button>
-
-<script>
-function removeInfo() {
-	if (!document.getElementById("demo").innerHTML.includes("Oops")) {
-		document.getElementById("demo").innerHTML = "Oops you got rid of the information";
-	}
-	
-	else {
-		document.getElementById("demo").innerHTML = "Hello veiwer this will be full of information ready for you to push button then";
-	}
-}
-</script>
-
+  <script>
+    // JavaScript for button functionality
+    function removeInfo() {
+      var demo = document.getElementById("demo");
+      if (!demo.innerHTML.includes("Oops")) {
+        demo.innerHTML = "Oops, you got rid of the information. But that's ok just press the the button again and see what happens.";
+      } else {
+        demo.innerHTML = "Would you look at that it put this text up here now. I wouldnt press it again it will just switch between these last two text options now.";
+      }
+    }
+  </script>
 
 </body>
+
 </html>

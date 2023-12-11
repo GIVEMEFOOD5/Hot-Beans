@@ -1,37 +1,71 @@
 <!DOCTYPE html>
 <html lang="en-UK">
-<head updateClock()>
-<title>Hot Beans</title>
-
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Cursor Example</title>
+  <title>Hot Beans</title>
+
   <style>
-    body {
-      cursor: none; /* Hide the default cursor */
+    * { 
+	cursor: none;
+	font-family: Arial;
+	text-align: center;
+	}
+	
+	body {
+      cursor: none;
+      background-color: #ff924a;
+      font-family: Arial, sans-serif;
+      color: black;
     }
 
     #custom-cursor {
       position: absolute;
-      width: 30px; /* Set the width of your custom cursor */
-      height: 30px; /* Set the height of your custom cursor */
-      background-image: url('bean.png'); /* Path to your custom cursor image */
+      width: 30px;
+      height: 30px;
+      background-image: url('bean.png');
       background-size: cover;
-      pointer-events: none; /* Make the cursor not interfere with mouse events */
-      z-index: 9999; /* Ensure the cursor is on top of other elements */
+      pointer-events: none;
+      z-index: 9999;
     }
-	
-	.topnav a {
-	cursor: none
-	}
-	
-	.no-cursor {
-		cursor: none;
-	}
-  </style>
 
-  <style>
-    /* Style for the overlay background */
+    .topnav {
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    .topnav a {
+      float: left;
+      display: block;
+      color: #ffffff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    .topnav a:hover {
+      background-color: orange;
+      color: black;
+    }
+
+    .container {
+      border-radius: 5px;
+      background-color: #ff924a;
+      padding: 20px;
+      color: black;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .error-message {
+      color: #ff0000;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+
     .overlay {
       display: none;
       position: fixed;
@@ -45,25 +79,141 @@
       z-index: 1;
     }
 
-    /* Style for the mini window */
     .mini-window {
       background: #fff;
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
+
+    .modal-buttons {
+      margin-top: 20px;
+    }
+	
+	img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #000;
+      border-radius: 100px;
+    }
   </style>
 
+  <script>
+    document.addEventListener('mousemove', (event) => {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.left = `${event.pageX - customCursor.clientWidth / 2}px`;
+      customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
+    });
+
+    function showCursor() {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.display = 'block';
+    }
+
+    function hideCursor() {
+      const customCursor = document.getElementById('custom-cursor');
+      customCursor.style.display = 'none';
+    }
+//form validation
+    function validateForm() {
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var phone = document.getElementById('phone').value;
+      var resume = document.getElementById('resume').value;
+      var experience = document.getElementById('experience').value;
+      var skills = document.getElementById('skills').value;
+
+      var errorMessages = [];
+
+      if (!name.trim()) {
+        errorMessages.push("Please enter your full name.");
+      }
+
+      if (!email.trim() || !isValidEmail(email)) {
+        errorMessages.push("Please enter a valid email address.");
+      }
+
+      if (!phone.trim() || !isValidPhoneNumber(phone)) {
+        errorMessages.push("Please enter a valid phone number (12345 123456).");
+      }
+
+      if (!resume.trim() || !isValidFileExtension(resume, ['.pdf', '.doc', '.docx'])) {
+        errorMessages.push("Please upload a valid resume file (PDF or Word).");
+      }
+
+      if (!experience.trim() || isNaN(experience) || experience < 0) {
+        errorMessages.push("Please enter a valid number for years of experience.");
+      }
+
+      if (!skills.trim()) {
+        errorMessages.push("Please enter your skills.");
+      }
+
+      var errorMessageContainer = document.getElementById('error-messages');
+      errorMessageContainer.innerHTML = "";
+
+      if (errorMessages.length > 0) {
+        for (var i = 0; i < errorMessages.length; i++) {
+          errorMessageContainer.innerHTML += "<p class='error-message'>" + errorMessages[i] + "</p>";
+        }
+        return false;
+      }
+
+      return true;
+    }
+
+    function isValidEmail(email) {
+      // Basic email validation
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function isValidPhoneNumber(phone) {
+      // Basic phone number validation (10 digits with space after the first 5 digits)
+      var phoneRegex = /^\d{5}\s\d{6}$/;
+      return phoneRegex.test(phone);
+    }
+
+    function isValidFileExtension(filename, validExtensions) {
+      var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+      return validExtensions.includes('.' + ext.toLowerCase());
+    }
+
+    function acceptTerms() {
+      // Perform actions when terms are accepted
+      closeOverlay();
+    }
+
+    function declineTerms() {
+      // Perform actions when terms are declined
+      closeOverlay();
+    }
+
+    function openOverlay() {
+      var overlay = document.getElementById('overlay');
+      overlay.style.display = 'flex';
+    }
+
+    function closeOverlay() {
+      var overlay = document.getElementById('overlay');
+      overlay.style.display = 'none';
+    }
+
+    function resetForm() {
+      document.getElementById('applicationForm').reset();
+    }
+  </script>
 </head>
-<body  onload="updateClock(); setInterval('updateClock()', 1000 )">
 
-<div class="header">
-	<h1 style="font-size:120px;"style="font-family:Agbalumo-Regular">Hot Beans<img src="baked beans.png" alt="beans" width="100" height="100"></h1>
-	<p></p>
-</div>
+<body onload="updateClock(); setInterval('updateClock()', 1000)">
+  <div class="header">
+    <h1 style="font-size:120px; font-family:Arial">Hot Beans<img src="baked beans.png" alt="beans" width="100" height="100" ></h1>
+    <p></p>
+  </div>
 
-<p id="time_span">Loading...</p>
-<script>
+  <p id="time_span">Loading...</p>
+  
+  <script>
 function updateTime(){
     var currentTime = new Date()
     var hours = currentTime.getHours()
@@ -82,224 +232,20 @@ function updateTime(){
 setInterval(updateTime, 1000);
 </script>
 
-<div class="topnav">
-	<a href="HotbeansHome.html">Home</a>
-	<a href="InfoPage.html">Information</a>
-	<a href="apply.html">Apply Here</a>
-</div>
+  <div class="topnav">
+    <a href="HotbeansHome.html">Home</a>
+    <a href="InfoPage.html">Information</a>
+    <a href="apply.html">Apply Here</a>
+  </div>
 
-<style>
-body {background-color:  #ff924a;}
-
-* { 
-	cursor: none;
-	box-sizing: border-box;
-	font-family:arial;
-	color: black
-}
-
-/* start of form */
- 
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
- 
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ff924a;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
-}
- 
-input[type=submit] {
-  background-color: #ff924a;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
- 
-input[type=submit]:hover {
-  background-color: #ff924a;
-}
- 
-.container {
-  border-radius: 5px;
-  background-color: #ff924a;
-  padding: 20px;
-  color: black;
-}
- 
-	label {
-	display: block;
-	margin-bottom: 8px;
-	}
-	
-	.error-message {
-	color: #ff0000;
-	margin-top: -10px;
-	margin-bottom: 10px;
-	}
- 
-/* end of form */
-
-img {border-radius: 100px;}
-
-
-/* Style the top navigation bar */
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-/* Style the topnav links */
-.topnav a {
-  float: left;
-  display: block;
-  color: #ffffff;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change color on hover */
-.topnav a:hover {
-  background-color: orange;
-  color: black;
-}
-</style>
-
-  <!-- Custom cursor element -->
   <div id="custom-cursor"></div>
 
-  <script>
-    document.addEventListener('mousemove', (event) => {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.left = `${event.pageX - customCursor.clientWidth / 2}px`;
-      customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
-    });
-	
-	    function showCursor() {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.display = 'block';
-    }
+  <form action="\submit-application" method="post" id="applicationForm" onsubmit="return validateForm()">
+    <div class="container">
+      <h1>Apply Here</h1>
+      <p>Please fill in this form to apply for a job.</p>
 
-    function hideCursor() {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.display = 'none';
-    }
-</script>
-
-
-<br>
-
-    <script>
-	
-	var termsAccepted = false;
-	
-        function validateForm() {
-		
-			            // Only submit the form if terms are accepted
-            if (!termsAccepted) {
-                alert("Please accept the terms and conditions before submitting the application.");
-                return false;
-            }
-
-            return true;
-        }
-		
-            var name = document.getElementById('name').value;
-            var email = document.getElementById('email').value;
-            var phone = document.getElementById('phone').value;
-            var resume = document.getElementById('resume').value;
-            var experience = document.getElementById('experience').value;
-            var skills = document.getElementById('skills').value;
-
-            var errorMessages = [];
-
-            if (!name.trim()) {
-                errorMessages.push("Please enter your full name.");
-            }
-
-            if (!email.trim() || !isValidEmail(email)) {
-                errorMessages.push("Please enter a valid email address.");
-            }
-
-            if (!phone.trim()) {
-                errorMessages.push("Please enter your phone number.");
-            }
-
-            if (!resume.trim()) {
-                errorMessages.push("Please upload your resume.");
-            }
-
-            if (!experience.trim() || isNaN(experience) || experience < 0) {
-                errorMessages.push("Please enter a valid number for years of experience.");
-            }
-
-            if (!skills.trim()) {
-                errorMessages.push("Please enter your skills.");
-            }
-
-            var errorMessageContainer = document.getElementById('error-messages');
-            errorMessageContainer.innerHTML = "";
-
-            if (errorMessages.length > 0) {
-                for (var i = 0; i < errorMessages.length; i++) {
-                    errorMessageContainer.innerHTML += "<p class='error-message'>" + errorMessages[i] + "</p>";
-                }
-                return false;
-            }
-
-            return true;
-        }
-
-        function isValidEmail(email) {
-            // Basic email validation
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-		
-        function isValidPhoneNumber(phone) {
-            // Basic phone number validation (10 digits with space after the first 5 digits)
-            var phoneRegex = /^\d{5}(\s?)\d{6}$/;
-            return phoneRegex.test(phone);
-        }
-		
-		        function openoverlay() {
-            var overlay = document.getElementById('overlay');
-            overlay.style.display = 'block';
-        }
-
-        function closeoverlay() {
-            var overlay = document.getElementById('overlay');
-            overlay.style.display = 'none';
-        }
-
-        function acceptTerms() {
-            // Perform actions when terms are accepted
-            closeoverlay();
-        }
-
-        function declineTerms() {
-            // Perform actions when terms are declined
-			closeoverlay();
-        }
-    </script>
-</head>
-<body>
-
-
-<form action="\submit-application" method="post" onsubmit="return validateForm()">
-  <div class="container">
-    <h1>Apply Here</h1>
-    <p>Please fill in this form to apply for a job.</p>
-	
-    <label for="name">Full Name:</label>
+          <label for="name"><b>Full Name:</b></label>
     <input type="text" id="name" name="name" placeholder="First Last" required>
 	
 	<label for="phone"><b>Phone Number:</b></label>
@@ -323,7 +269,7 @@ img {border-radius: 100px;}
 	<option value="back">Back-end developer</option>
 	<option value="full">Full-stack developer</option>
 	</select>
-
+	<br><br>
 	  <b>Prefered Gender:</b>
   <input value="Female" type="radio" name="Gender">
   Female
@@ -332,7 +278,7 @@ img {border-radius: 100px;}
    <input value="Other" type="radio" name="Gender" required>
   Other
   <br><br>
-    <b><label for="resume">Resume (PDF or Word):</label></b>
+    <b><label for="resume">Resume (PDF, .DOC, .DOCX):</label></b>
     <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required>
 <br><br>
     <b><label for="portfolio">Portfolio URL:</label></b>
@@ -346,22 +292,21 @@ img {border-radius: 100px;}
 
     <b><label for="comments">Additional Comments:</label></b>
     <textarea id="comments" name="comments" rows="4" placeholder="Write any additional comments here..."></textarea>
-  
-    <p>By pressing apply you agree to our <a href="#" onclick="openMiniWindow()" style="color:dodgerblue">Terms & Conditions</a>.</p> <!-- this opens a mini window -->
 
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="applybtn">Apply</button>
+      <p>Please read our <a href="#" onclick="openOverlay()" style="color:dodgerblue">Terms & Conditions</a>.</p>
+
+      <div class="clearfix">
+        <button type="button" class="cancelbtn" onclick="resetForm()">Cancel</button>
+        <button type="submit" class="applybtn">Apply</button>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
 
-
-<!-- Overlay and mini window -->
-<div class="overlay" id="overlay">
-  <div class="mini-window">
-    <h2>Terms and Conditions</h2>
-    <p><strong>1. Introduction</strong></p>
+  <!-- Overlay and mini window -->
+  <div class="overlay" id="overlay">
+    <div class="mini-window">
+      <h2>Terms and Conditions</h2>
+          <p><strong>1. Introduction</strong></p>
             <p>Welcome to our web development job application form. Before submitting your application, please read and agree to the following terms and conditions:</p>
             
             <p><strong>2. Application Submission</strong></p>
@@ -372,29 +317,13 @@ img {border-radius: 100px;}
 
             <p><strong>4. Agreement</strong></p>
             <p>By checking the box and submitting your application, you agree to be bound by these terms and conditions.</p>
-            
-			<div class="modal-buttons">
-				<button onclick="acceptTerms(); closeoverlay();">Accept</button>
-				<button onclick="declineTerms(); closeoverlay();">Decline</button>
+
+      <div class="modal-buttons">
+        <button onclick="acceptTerms(); closeOverlay(); termsAccepted()">Accept</button>
+        <button onclick="declineTerms(); closeOverlay();">Decline</button>
+      </div>
+    </div>
   </div>
-</div>
-
-<script>
-  function openMiniWindow() {
-    document.getElementById('overlay').style.display = 'flex';
-  }
-
-  function closeMiniWindow() {
-    document.getElementById('overlay').style.display = 'none';
-  }
-  
-          // Enable or disable the submit button based on the termsAccepted status
-        document.getElementById('submitBtn').addEventListener('click', function() {
-            if (!termsAccepted) {
-                alert("Please accept the terms and conditions before submitting the application.");
-            }
-        });
-</script>
-
 </body>
+
 </html>

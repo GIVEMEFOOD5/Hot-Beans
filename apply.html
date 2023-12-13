@@ -7,27 +7,16 @@
 
   <style>
     * { 
-	cursor: none;
 	font-family: Arial;
 	text-align: center;
 	}
 	
 	body {
-      cursor: none;
       background-color: #ff924a;
       font-family: Arial, sans-serif;
       color: black;
     }
 
-    #custom-cursor {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      background-image: url('bean.png');
-      background-size: cover;
-      pointer-events: none;
-      z-index: 9999;
-    }
 
     .topnav {
       overflow: hidden;
@@ -99,21 +88,6 @@
   </style>
 
   <script>
-    document.addEventListener('mousemove', (event) => {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.left = `${event.pageX - customCursor.clientWidth / 2}px`;
-      customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
-    });
-
-    function showCursor() {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.display = 'block';
-    }
-
-    function hideCursor() {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.display = 'none';
-    }
 //form validation
     function validateForm() {
       var name = document.getElementById('name').value;
@@ -202,6 +176,8 @@
     function resetForm() {
       document.getElementById('applicationForm').reset();
     }
+	
+	
   </script>
 </head>
 
@@ -240,8 +216,9 @@ setInterval(updateTime, 1000);
 
   <div id="custom-cursor"></div>
 
-  <form action="\submit-application" method="post" id="applicationForm" onsubmit="return validateForm()">
+
     <div class="container">
+  <form action="submited.html" onsubmit="validateForm()">
       <h1>Apply Here</h1>
       <p>Please fill in this form to apply for a job.</p>
 
@@ -253,10 +230,9 @@ setInterval(updateTime, 1000);
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
-
-    <label>
-      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-	</label>
+	
+	<br><br>
+	
 	<b>Please enter the job title you would like</b>
 	<select class="no-cursor" name="jobTitle" required>
 	<option value="front">Front-end developer</option>

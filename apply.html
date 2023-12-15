@@ -9,6 +9,7 @@
     * { 
 	font-family: Arial;
 	text-align: center;
+	transition: 0.25s ease;
 	}
 	
 	body {
@@ -87,81 +88,74 @@
     }
   </style>
 
-  <script>
+<script>
 //form validation
-    function validateForm() {
-      var name = document.getElementById('name').value;
-      var email = document.getElementById('email').value;
-      var phone = document.getElementById('phone').value;
-      var resume = document.getElementById('resume').value;
-      var experience = document.getElementById('experience').value;
-      var skills = document.getElementById('skills').value;
+document.getElementById('applybtn').addEventListener('click', function() {
 
-      var errorMessages = [];
+function validateForm() {
+  var name = document.getElementById('nameField').value;
+  var email = document.getElementById('emailField').value;
+  var phone = document.getElementById('phoneField').value;
+  var resume = document.getElementById('resumeField').value;
+  var experience = document.getElementById('experienceField').value;
+  var skills = document.getElementById('skillsField').value;
 
-      if (!name.trim()) {
-        errorMessages.push("Please enter your full name.");
-      }
+  var errorMessages = [];
 
-      if (!email.trim() || !isValidEmail(email)) {
-        errorMessages.push("Please enter a valid email address.");
-      }
+  if (!name.trim()) {
+    errorMessages.push("Please enter your full name.");
+  }
 
-      if (!phone.trim() || !isValidPhoneNumber(phone)) {
-        errorMessages.push("Please enter a valid phone number (12345 123456).");
-      }
+  if (!isValidEmail(email)) {
+    errorMessages.push("Please enter a valid email address.");
+  }
 
-      if (!resume.trim() || !isValidFileExtension(resume, ['.pdf', '.doc', '.docx'])) {
-        errorMessages.push("Please upload a valid resume file (PDF or Word).");
-      }
+  if (!isValidPhoneNumber(phone)) {
+    errorMessages.push("Please enter a valid phone number (12345 123456).");
+  }
 
-      if (!experience.trim() || isNaN(experience) || experience < 0) {
-        errorMessages.push("Please enter a valid number for years of experience.");
-      }
+  if (!isValidFileExtension(resume, ['.pdf', '.doc', '.docx'])) {
+    errorMessages.push("Please upload a valid resume file (PDF or Word).");
+  }
 
-      if (!skills.trim()) {
-        errorMessages.push("Please enter your skills.");
-      }
+  if (isNaN(experience) || experience < 0) {
+    errorMessages.push("Please enter a valid number for years of experience.");
+  }
 
-      var errorMessageContainer = document.getElementById('error-messages');
-      errorMessageContainer.innerHTML = "";
+  if (!skills.trim()) {
+    errorMessages.push("Please enter your skills.");
+  }
 
-      if (errorMessages.length > 0) {
-        for (var i = 0; i < errorMessages.length; i++) {
-          errorMessageContainer.innerHTML += "<p class='error-message'>" + errorMessages[i] + "</p>";
-        }
-        return false;
-      }
+  var errorMessageContainer = document.getElementById('error-messages');
+  errorMessageContainer.innerHTML = "";
 
-      return true;
+  if (errorMessages.length > 0) {
+    for (var i = 0; i < errorMessages.length; i++) {
+      errorMessageContainer.innerHTML += "<p class='error-message'>" + errorMessages[i] + "</p>";
     }
+    return false;
+  }
 
-    function isValidEmail(email) {
-      // Basic email validation
-      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
+  return true;
+}
+});
 
-    function isValidPhoneNumber(phone) {
-      // Basic phone number validation (10 digits with space after the first 5 digits)
-      var phoneRegex = /^\d{5}\s\d{6}$/;
-      return phoneRegex.test(phone);
-    }
+function isValidEmail(email) {
+  // Basic email validation
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
-    function isValidFileExtension(filename, validExtensions) {
-      var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
-      return validExtensions.includes('.' + ext.toLowerCase());
-    }
+function isValidPhoneNumber(phone) {
+  // Basic phone number validation (5 digits, space, 6 digits)
+  var phonePattern = /^\d{5}\s\d{6}$/;
+  return phonePattern.test(phone);
+}
 
-    function acceptTerms() {
-      // Perform actions when terms are accepted
-      closeOverlay();
-    }
-
-    function declineTerms() {
-      // Perform actions when terms are declined
-      closeOverlay();
-    }
+function isValidFileExtension(filename, validExtensions) {
+  var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+  return validExtensions.includes('.' + ext.toLowerCase());
+}
 
     function openOverlay() {
       var overlay = document.getElementById('overlay');
@@ -177,19 +171,18 @@
       document.getElementById('applicationForm').reset();
     }
 	
-	
-  </script>
+</script>
 </head>
 
-<body onload="updateClock(); setInterval('updateClock()', 1000)">
+<body onload="updateTime(); setInterval('updateTime()', 1000)">
   <div class="header">
     <h1 style="font-size:120px; font-family:Arial">Hot Beans<img src="baked beans.png" alt="beans" width="100" height="100" ></h1>
     <p></p>
   </div>
 
   <p id="time_span">Loading...</p>
-  
-  <script>
+
+<script>
 function updateTime(){
     var currentTime = new Date()
     var hours = currentTime.getHours()
@@ -207,7 +200,6 @@ function updateTime(){
 }
 setInterval(updateTime, 1000);
 </script>
-
   <div class="topnav">
     <a href="HotbeansHome.html">Home</a>
     <a href="InfoPage.html">Information</a>
@@ -216,20 +208,19 @@ setInterval(updateTime, 1000);
 
   <div id="custom-cursor"></div>
 
-
+<form action="submited.html" onsubmit="return validateForm()">
     <div class="container">
-  <form action="submited.html" onsubmit="validateForm()">
       <h1>Apply Here</h1>
       <p>Please fill in this form to apply for a job.</p>
 
           <label for="name"><b>Full Name:</b></label>
-    <input type="text" id="name" name="name" placeholder="First Last" required>
+    <input type="text" id="nameField" name="name" placeholder="First Last" required>
 	
 	<label for="phone"><b>Phone Number:</b></label>
-	<input type="text" id="phone" name="phone" placeholder="12345 123456" required>
+	<input type="text" id="phoneField" name="phone" placeholder="12345 123456" required>
 
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <input type="text" placeholder="Enter Email" name="emailField" id="email" required>
 	
 	<br><br>
 	
@@ -249,16 +240,16 @@ setInterval(updateTime, 1000);
   Other
   <br><br>
     <b><label for="resume">Resume (PDF, .DOC, .DOCX):</label></b>
-    <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx" required>
+    <input type="file" id="resumeField" name="resume" accept=".pdf, .doc, .docx" required>
 <br><br>
     <b><label for="portfolio">Portfolio URL:</label></b>
     <input type="url" id="portfolio" name="portfolio" placeholder="https://portfolio.example.com">
 <br><br>
     <b><label for="experience">Years of Experience:</label></b>
-    <input type="number" id="experience" name="experience" min="0" placeholder="Years of your experience:" required>
+    <input type="number" id="experienceField" name="experience" min="0" placeholder="Years of your experience:" required>
 <br><br>
     <b><label for="skills">Skills (comma-separated):</label></b>
-    <input type="text" id="skills" name="skills" placeholder="HTML, CSS, JavaScript" required>
+    <input type="text" id="skillsField" name="skills" placeholder="HTML, CSS, JavaScript" required>
 
     <b><label for="comments">Additional Comments:</label></b>
     <textarea id="comments" name="comments" rows="4" placeholder="Write any additional comments here..."></textarea>
@@ -266,8 +257,8 @@ setInterval(updateTime, 1000);
       <p>Please read our <a href="#" onclick="openOverlay()" style="color:dodgerblue">Terms & Conditions</a>.</p>
 
       <div class="clearfix">
-        <button type="button" class="cancelbtn" onclick="resetForm()">Cancel</button>
-        <button type="submit" class="applybtn">Apply</button>
+        <button type="reset" class="cancelbtn" onclick="resetForm()">Cancel</button>
+        <button type="submit" class="applybtn" onclick="validateForm()">Apply</button>
       </div>
     </div>
   </form>

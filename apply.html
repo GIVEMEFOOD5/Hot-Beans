@@ -143,17 +143,23 @@ function validateForm() {
 }
 });
 
-function isValidEmail(email) {
-  // Basic email validation
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
 function isValidPhoneNumber(phone) {
   // Basic phone number validation (5 digits, space, 6 digits)
   var phonePattern = /^\d{5}\s\d{6}$/;
   return phonePattern.test(phone);
 }
+
+        document.getElementById('applybtn').addEventListener('click', function() {
+            var email = document.getElementById('emailField').value;
+            if (!validateEmail(email)) {
+                document.getElementById('error-Message').innerText = 'Please enter a valid email address.';
+            }
+        });
+ 
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
 
 function isValidFileExtension(filename, validExtensions) {
   var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
@@ -220,10 +226,10 @@ setInterval(updateTime, 1000);
     <input type="text" id="nameField" name="name" placeholder="First Last" required>
 	
 	<label for="phone"><b>Phone Number:</b></label>
-	<input type="text" id="phoneField" name="phone" placeholder="12345 123456" required>
+	<input type="text" id="phoneField" name="phone" placeholder="12345 123456" pattern="[0-9]{5} [0-9]{6}" required>
 
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="emailField" id="email" required>
+    <input type="email" placeholder="Enter Email" name="email" id="emailField" required>
 	
 	<br><br>
 	

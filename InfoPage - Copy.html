@@ -2,15 +2,13 @@
 <html lang="en-UK">
 <head updateClock()>
 <title>Hot Beans</title>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Cursor Example</title>
   <style>
-  
-	* {
-	text-align: center;
-	}
+	  * {
+	    text-align: center;
+	  }
   
     body {
       cursor: none; /* Hide the default cursor */
@@ -26,13 +24,12 @@
       z-index: 9999; /* Ensure the cursor is on top of other elements */
     }
 	
-			.topnav a {
-	cursor: none
-	}
+    .topnav a {
+      cursor: none
+    }
   </style>
-
 </head>
-<body  onload="updateClock(); setInterval('updateClock()', 1000 )">
+<body onload="updateClock(); setInterval('updateClock()', 1000 )">
 
 <div class="header">
 	<h1 style="font-size:120px;" style="font-family: Arial">Hot Beans<img src="baked beans.png" alt="beans" width="100" height="100"></h1>
@@ -41,7 +38,7 @@
 
 <p id="time_span">Loading...</p>
 <script>
-function updateTime(){
+  function updateTime(){
     var currentTime = new Date()
     var hours = currentTime.getHours()
     var minutes = currentTime.getMinutes()
@@ -51,11 +48,13 @@ function updateTime(){
     var t_str = hours + ":" + minutes + " ";
     if(hours > 11){
         t_str += "PM";
-    } else {
+    }
+    
+    else {
         t_str += "AM";
     }
     document.getElementById('time_span').innerHTML = t_str;
-}
+  }
 setInterval(updateTime, 1000);
 </script>
 
@@ -66,94 +65,95 @@ setInterval(updateTime, 1000);
 </div>
 
 <style>
-body {background-color:  #ff924a;}
+  body {
+    background-color:  #ff924a;
+  }
 
-* { 
-cursor: none;
-	box-sizing: border-box;
-	font-family:arial;
-	color: black
-}
+  * { 
+    cursor: none;
+    box-sizing: border-box;
+    font-family:arial;
+    color: black
+  }
 
-img {border-radius: 100px;}
+  img {
+    border-radius: 100px;
+  }
 
+  /* Style the top navigation bar */
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
 
-/* Style the top navigation bar */
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
+  /* Style the topnav links */
+  .topnav a {
+    float: left;
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
 
-/* Style the topnav links */
-.topnav a {
-  float: left;
-  display: block;
-  color: #ffffff;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
+  /* Change color on hover */
+  .topnav a:hover {
+    background-color: orange;
+    color: black;
+  }
 
-/* Change color on hover */
-.topnav a:hover {
-  background-color: orange;
-  color: black;
-}
-
-img{
-max-width: 100%;
-height: auto;
-}
-
+  img{
+    max-width: 100%;
+    height: auto;
+  }
 </style>
 
 <style>
-/* Create three equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 15px;
-}
-
-/* Clear floats after the columns */
-.row::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width:600px) {
+  /* Create three equal columns that floats next to each other */
   .column {
-    width: 100%;
+    float: left;
+    width: 33.33%;
+    padding: 15px;
   }
-}
 
-a:hover {
-color: blue;
-}
+  /* Clear floats after the columns */
+  .row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+  @media screen and (max-width:600px) {
+    .column {
+      width: 100%;
+    }
+  }
+
+  a:hover {
+    color: blue;
+  }
 </style>
+<!-- Custom cursor element -->
+<div id="custom-cursor"></div>
 
-  <!-- Custom cursor element -->
-  <div id="custom-cursor"></div>
+<script>
+  document.addEventListener('mousemove', (event) => {
+    const customCursor = document.getElementById('custom-cursor');
+    customCursor.style.left = `${event.pageX - customCursor.clientWidth / 2}px`;
+    customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
+  });
 
-  <script>
-    document.addEventListener('mousemove', (event) => {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.left = `${event.pageX - customCursor.clientWidth / 2}px`;
-      customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
-    });
-	
-	    function showCursor() {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.display = 'block';
-    }
+  function showCursor() {
+    const customCursor = document.getElementById('custom-cursor');
+    customCursor.style.display = 'block';
+  }
 
-    function hideCursor() {
-      const customCursor = document.getElementById('custom-cursor');
-      customCursor.style.display = 'none';
-    }
-  </script>
+  function hideCursor() {
+    const customCursor = document.getElementById('custom-cursor');
+    customCursor.style.display = 'none';
+  }
+</script>
 
 <div class="row">
   <div class="column">
@@ -176,5 +176,5 @@ color: blue;
 </div>
 
 <img src="group meeting.jpg" alt="a group of people having a meeting">
-
 </body>
+</html>

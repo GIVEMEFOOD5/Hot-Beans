@@ -10,12 +10,12 @@
 
   <style>
     * { 
-	font-family: Arial;
-	text-align: center;
-	transition: 0.5s ease;
-	}
+	    font-family: Arial;
+	    text-align: center;
+    	transition: 0.5s ease;
+	  }
 	
-	body {
+	  body {
       background-color: #ff924a;
       font-family: Arial, sans-serif;
       color: black;
@@ -90,81 +90,80 @@
       border-radius: 100px;
     }
   </style>
+  <script>
+    //form validation
+    document.getElementById('applybtn').addEventListener('click', function() {
 
-<script>
-//form validation
-document.getElementById('applybtn').addEventListener('click', function() {
+      function validateForm() {
+        var name = document.getElementById('nameField').value;
+        var email = document.getElementById('emailField').value;
+        var phone = document.getElementById('phoneField').value;
+        var resume = document.getElementById('resumeField').value;
+        var experience = document.getElementById('experienceField').value;
+        var skills = document.getElementById('skillsField').value;
 
-function validateForm() {
-  var name = document.getElementById('nameField').value;
-  var email = document.getElementById('emailField').value;
-  var phone = document.getElementById('phoneField').value;
-  var resume = document.getElementById('resumeField').value;
-  var experience = document.getElementById('experienceField').value;
-  var skills = document.getElementById('skillsField').value;
+        var errorMessages = [];
 
-  var errorMessages = [];
-
-  if (!name.trim()) {
-    errorMessages.push("Please enter your full name.");
-  }
-
-  if (!isValidEmail(email)) {
-    errorMessages.push("Please enter a valid email address.");
-  }
-
-  if (!isValidPhoneNumber(phone)) {
-    errorMessages.push("Please enter a valid phone number (12345 123456).");
-  }
-
-  if (!isValidFileExtension(resume, ['.pdf', '.doc', '.docx'])) {
-    errorMessages.push("Please upload a valid resume file (PDF or Word).");
-  }
-
-  if (isNaN(experience) || experience < 0) {
-    errorMessages.push("Please enter a valid number for years of experience.");
-  }
-
-  if (!skills.trim()) {
-    errorMessages.push("Please enter your skills.");
-  }
-
-  var errorMessageContainer = document.getElementById('error-messages');
-  errorMessageContainer.innerHTML = "";
-
-  if (errorMessages.length > 0) {
-    for (var i = 0; i < errorMessages.length; i++) {
-      errorMessageContainer.innerHTML += "<p class='error-message'>" + errorMessages[i] + "</p>";
-    }
-    return false;
-  }
-
-  return true;
-}
-});
-
-function isValidPhoneNumber(phone) {
-  // Basic phone number validation (5 digits, space, 6 digits)
-  var phonePattern = /^\d{5}\s\d{6}$/;
-  return phonePattern.test(phone);
-}
-
-        document.getElementById('applybtn').addEventListener('click', function() {
-            var email = document.getElementById('emailField').value;
-            if (!validateEmail(email)) {
-                document.getElementById('error-Message').innerText = 'Please enter a valid email address.';
-            }
-        });
- 
-        function validateEmail(email) {
-            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
+        if (!name.trim()) {
+          errorMessages.push("Please enter your full name.");
         }
 
-function isValidFileExtension(filename, validExtensions) {
-  var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
-  return validExtensions.includes('.' + ext.toLowerCase());
-}
+        if (!isValidEmail(email)) {
+          errorMessages.push("Please enter a valid email address.");
+        }
+
+        if (!isValidPhoneNumber(phone)) {
+          errorMessages.push("Please enter a valid phone number (12345 123456).");
+        }
+
+        if (!isValidFileExtension(resume, ['.pdf', '.doc', '.docx'])) {
+          errorMessages.push("Please upload a valid resume file (PDF or Word).");
+        }
+
+        if (isNaN(experience) || experience < 0) {
+          errorMessages.push("Please enter a valid number for years of experience.");
+        }
+
+        if (!skills.trim()) {
+          errorMessages.push("Please enter your skills.");
+        }
+
+        var errorMessageContainer = document.getElementById('error-messages');
+        errorMessageContainer.innerHTML = "";
+
+        if (errorMessages.length > 0) {
+          for (var i = 0; i < errorMessages.length; i++) {
+            errorMessageContainer.innerHTML += "<p class='error-message'>" + errorMessages[i] + "</p>";
+          }
+          return false;
+        }
+
+        return true;
+      }
+    });
+
+    function isValidPhoneNumber(phone) {
+      // Basic phone number validation (5 digits, space, 6 digits)
+      var phonePattern = /^\d{5}\s\d{6}$/;
+      return phonePattern.test(phone);
+    }
+
+    document.getElementById('applybtn').addEventListener('click', function() {
+      var email = document.getElementById('emailField').value;
+      if (!validateEmail(email)) {
+        document.getElementById('error-Message').innerText = 'Please enter a valid email address.';
+      }
+    });
+
+    function validateEmail(email) {
+      var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    function isValidFileExtension(filename, validExtensions) {
+      var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+      return validExtensions.includes('.' + ext.toLowerCase());
+    }
 
     function openOverlay() {
       var overlay = document.getElementById('overlay');
@@ -179,8 +178,7 @@ function isValidFileExtension(filename, validExtensions) {
     function resetForm() {
       document.getElementById('applicationForm').reset();
     }
-	
-</script>
+  </script>
 </head>
 
 <body onload="updateTime(); setInterval('updateTime()', 1000)">
@@ -191,24 +189,28 @@ function isValidFileExtension(filename, validExtensions) {
 
   <p id="time_span">Loading...</p>
 
-<script>
-function updateTime(){
-    var currentTime = new Date()
-    var hours = currentTime.getHours()
-    var minutes = currentTime.getMinutes()
-    if (minutes < 10){
+  <script>
+    function updateTime(){
+      var currentTime = new Date()
+      var hours = currentTime.getHours()
+      var minutes = currentTime.getMinutes()
+      if (minutes < 10){
         minutes = "0" + minutes
-    }
-    var t_str = hours + ":" + minutes + " ";
-    if(hours > 11){
+      }
+
+      var t_str = hours + ":" + minutes + " ";
+
+      if(hours > 11){
         t_str += "PM";
-    } else {
+      }
+      
+      else {
         t_str += "AM";
+      }
+      document.getElementById('time_span').innerHTML = t_str;
     }
-    document.getElementById('time_span').innerHTML = t_str;
-}
-setInterval(updateTime, 1000);
-</script>
+    setInterval(updateTime, 1000);
+  </script>
   <div class="topnav">
     <a href="HotbeansHome.html">Home</a>
     <a href="InfoPage.html">Information</a>
@@ -217,51 +219,61 @@ setInterval(updateTime, 1000);
 
   <div id="custom-cursor"></div>
 
-<form action="submited.html" onsubmit="return validateForm()">
+  <form action="submited.html" onsubmit="return validateForm()">
     <div class="container">
       <h1>Apply Here</h1>
       <p>Please fill in this form to apply for a job.</p>
 
-          <label for="name"><b>Full Name:</b></label>
-    <input type="text" id="nameField" name="name" placeholder="First Last" required>
+      <label for="name"><b>Full Name:</b></label>
+      <input type="text" id="nameField" name="name" placeholder="First Last" required>
 	
-	<label for="phone"><b>Phone Number:</b></label>
-	<input type="text" id="phoneField" name="phone" placeholder="12345 123456" pattern="[0-9]{5} [0-9]{6}" required>
+	    <label for="phone"><b>Phone Number:</b></label>
+	    <input type="text" id="phoneField" name="phone" placeholder="12345 123456" pattern="[0-9]{5} [0-9]{6}" required>
 
-    <label for="email"><b>Email</b></label>
-    <input type="email" placeholder="Enter Email" name="email" id="emailField" required>
+      <label for="email"><b>Email</b></label>
+      <input type="email" placeholder="Enter Email" name="email" id="emailField" required>
 	
-	<br><br>
-	
-	<b>Please enter the job title you would like</b>
-	<select class="no-cursor" name="jobTitle" required>
-	<option value="front">Front-end developer</option>
-	<option value="back">Back-end developer</option>
-	<option value="full">Full-stack developer</option>
-	</select>
-	<br><br>
-	  <b>Prefered Gender:</b>
-  <input value="Female" type="radio" name="Gender">
-  Female
-  <input value="Male" type="radio" name="Gender">
-  Male
-   <input value="Other" type="radio" name="Gender" required>
-  Other
-  <br><br>
-    <b><label for="resume">Resume (PDF, .DOC, .DOCX):</label></b>
-    <input type="file" id="resumeField" name="resume" accept=".pdf, .doc, .docx" required>
-<br><br>
-    <b><label for="portfolio">Portfolio URL:</label></b>
-    <input type="url" id="portfolio" name="portfolio" placeholder="https://portfolio.example.com">
-<br><br>
-    <b><label for="experience">Years of Experience:</label></b>
-    <input type="number" id="experienceField" name="experience" min="0" placeholder="Years of your experience:" required>
-<br><br>
-    <b><label for="skills">Skills (comma-separated):</label></b>
-    <input type="text" id="skillsField" name="skills" placeholder="HTML, CSS, JavaScript" required>
+	    <br><br>
+      
+      <b>Please enter the job title you would like</b>
+      <select class="no-cursor" name="jobTitle" required>
+        <option value="front">Front-end developer</option>
+        <option value="back">Back-end developer</option>
+        <option value="full">Full-stack developer</option>
+      </select>
 
-    <b><label for="comments">Additional Comments:</label></b>
-    <textarea id="comments" name="comments" rows="4" placeholder="Write any additional comments here..."></textarea>
+	    <br><br>
+
+	    <b>Prefered Gender:</b>
+      <input value="Female" type="radio" name="Gender">
+      Female
+      <input value="Male" type="radio" name="Gender">
+      Male
+      <input value="Other" type="radio" name="Gender" required>
+      Other
+
+      <br><br>
+
+      <b><label for="resume">Resume (PDF, .DOC, .DOCX):</label></b>
+      <input type="file" id="resumeField" name="resume" accept=".pdf, .doc, .docx" required>
+
+      <br><br>
+
+      <b><label for="portfolio">Portfolio URL:</label></b>
+      <input type="url" id="portfolio" name="portfolio" placeholder="https://portfolio.example.com">
+
+      <br><br>
+
+      <b><label for="experience">Years of Experience:</label></b>
+      <input type="number" id="experienceField" name="experience" min="0" placeholder="Years of your experience:" required>
+
+      <br><br>
+
+      <b><label for="skills">Skills (comma-separated):</label></b>
+      <input type="text" id="skillsField" name="skills" placeholder="HTML, CSS, JavaScript" required>
+
+      <b><label for="comments">Additional Comments:</label></b>
+      <textarea id="comments" name="comments" rows="4" placeholder="Write any additional comments here..."></textarea>
 
       <p>Please read our <a href="#" onclick="openOverlay()" style="color:dodgerblue">Terms & Conditions</a>.</p>
 
@@ -276,17 +288,17 @@ setInterval(updateTime, 1000);
   <div class="overlay" id="overlay">
     <div class="mini-window">
       <h2>Terms and Conditions</h2>
-          <p><strong>1. Introduction</strong></p>
-            <p>Welcome to our web development job application form. Before submitting your application, please read and agree to the following terms and conditions:</p>
-            
-            <p><strong>2. Application Submission</strong></p>
-            <p>By submitting your application, you acknowledge that the information provided is accurate and complete to the best of your knowledge.</p>
-            
-            <p><strong>3. Privacy Policy</strong></p>
-            <p>Your personal information will be handled in accordance with our privacy policy. Please review our privacy policy for more details.</p>
+      <p><strong>1. Introduction</strong></p>
+      <p>Welcome to our web development job application form. Before submitting your application, please read and agree to the following terms and conditions:</p>
+      
+      <p><strong>2. Application Submission</strong></p>
+      <p>By submitting your application, you acknowledge that the information provided is accurate and complete to the best of your knowledge.</p>
+      
+      <p><strong>3. Privacy Policy</strong></p>
+      <p>Your personal information will be handled in accordance with our privacy policy. Please review our privacy policy for more details.</p>
 
-            <p><strong>4. Agreement</strong></p>
-            <p>By checking the box and submitting your application, you agree to be bound by these terms and conditions.</p>
+      <p><strong>4. Agreement</strong></p>
+      <p>By checking the box and submitting your application, you agree to be bound by these terms and conditions.</p>
 
       <div class="modal-buttons">
         <button onclick="closeOverlay(); termsAccepted()">Accept</button>
@@ -295,5 +307,4 @@ setInterval(updateTime, 1000);
     </div>
   </div>
 </body>
-
 </html>

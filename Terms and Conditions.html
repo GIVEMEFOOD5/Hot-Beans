@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-UK">
 <head>
-<title>Hot Beans</title>
-
+  <title>Hot Beans</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Cursor Example</title>
   <style>
-    body {background-color:  #ff924a;}
-	
-	body {
+    body {
+      background-color:  #ff924a;
       cursor: none; /* Hide the default cursor */
     }
 
@@ -21,20 +19,18 @@
       background-size: cover;
       pointer-events: none; /* Make the cursor not interfere with mouse events */
       z-index: 9999; /* Ensure the cursor is on top of other elements */
-	  cursor: none;
+	    cursor: none;
     }
 	
-	.topnav a {
-	cursor: none
-	}
+	  .topnav a {
+	    cursor: none
+	  }
   </style>
-
 </head>
 <body>
-<h1 style="font-size:60px;" style="font-family:Agbalumo-Regular">Terms and Conditions</h1>
+  <h1 style="font-size:60px;" style="font-family:Agbalumo-Regular">Terms and Conditions</h1>
 
-
-<p>By signing in you give me full permission to use your email and password for whatever i feel like.</p>
+  <p>By signing in you give me full permission to use your email and password for whatever i feel like.</p>
 
   <!-- Custom cursor element -->
   <div id="custom-cursor"></div>
@@ -46,7 +42,7 @@
       customCursor.style.top = `${event.pageY - customCursor.clientHeight / 2}px`;
     });
 	
-	    function showCursor() {
+    function showCursor() {
       const customCursor = document.getElementById('custom-cursor');
       customCursor.style.display = 'block';
     }
@@ -56,6 +52,5 @@
       customCursor.style.display = 'none';
     }
   </script>
-
-
 </body>
+</html>
